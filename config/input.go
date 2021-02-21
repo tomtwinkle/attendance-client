@@ -99,15 +99,7 @@ func (c *config) inputSlackToken() (string, error) {
 		return errors.New("slack tokenを入力してください")
 	}
 	prompt := promptui.Prompt{
-		Label: fmt.Sprintf("%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
-			"slack tokenを入力してください。",
-			"1. https://api.slack.com/apps を開く",
-			"2. [Create New App] を選択",
-			"3. [OAuth & Permissions] を選択",
-			"4. [User Token Scopes] を選択 [channels:read, chat:write] を追加",
-			"5. [Install to Workspace] を選択",
-			"6. OAuth Access Token [Copy] を選択",
-		),
+		Label:    "slack tokenを入力してください",
 		Validate: validate,
 	}
 	result, err := prompt.Run()
@@ -126,14 +118,7 @@ func (c *config) inputSlackChannel() (string, error) {
 		return nil
 	}
 	prompt := promptui.Prompt{
-		Label: fmt.Sprintf("%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
-			"投稿したいチャンネル名(#を除いた)を入力してください",
-			"チャンネルにメッセージを投稿するためにはチャンネルにアプリを追加する必用があります。",
-			"1. [(i) チャンネル詳細] を選択",
-			"2. [... その他] を選択",
-			"3. [アプリを追加する] を選択",
-			"4. 作成したアプリを検索し、[追加]を選択. [表示する]となっている場合は追加は不要です.",
-		),
+		Label:    "投稿したいチャンネル名を入力してください",
 		Validate: validate,
 	}
 	result, err := prompt.Run()
