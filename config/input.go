@@ -100,18 +100,16 @@ func (c *config) inputSlackToken() (string, error) {
 		return errors.New("slack tokenを入力してください")
 	}
 	prompt := promptui.Prompt{
-		Label: fmt.Sprintf("%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
+		Label: fmt.Sprintf("%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s\n\t%s",
 			"slack tokenを入力してください。",
-			"1. [Create New App] を選択",
-			"2. [OAuth & Permissions] を選択",
-			"3. [User Token Scopes] を選択 [channels:read, chat:write] を追加",
-			"4. [Install to Workspace] を選択",
-			"5. OAuth Access Token [Copy] を選択",
+			"1. https://api.slack.com/apps を開く",
+			"2. [Create New App] を選択",
+			"3. [OAuth & Permissions] を選択",
+			"4. [User Token Scopes] を選択 [channels:read, chat:write] を追加",
+			"5. [Install to Workspace] を選択",
+			"6. OAuth Access Token [Copy] を選択",
 		),
 		Validate: validate,
-	}
-	if err := browserOpen(slackAppsUrl); err != nil {
-		return "", err
 	}
 	result, err := prompt.Run()
 	if err != nil {
@@ -147,6 +145,7 @@ func (c *config) inputSlackChannel() (string, error) {
 	return result, nil
 }
 
+//nolint
 func browserOpen(url string) error {
 	switch runtime.GOOS {
 	case "windows":
