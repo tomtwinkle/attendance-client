@@ -7,10 +7,28 @@ Attendance Bugyo Cloud Punchmark & post Slack message CLI
 - Install with PowerShell
 
 ```poweshell
-iwr https://github.com/tomtwinkle/attendance-client/releases/download/v0.0.1/attendance_windows_amd64.zip -OutFile attendance.zip && Expand-Archive -Path attendance.zip && rm attendance.zip
+iwr https://github.com/tomtwinkle/attendance-client/releases/download/v0.0.3/attendance_windows_amd64.zip -OutFile attendance.zip && Expand-Archive -Path attendance.zip && rm attendance.zip
 cd attendance
 .\attendance.exe help
 ```
+
+- Generate Slack Token
+
+> 1. https://api.slack.com/apps を開く
+> 2. [Create New App] を選択
+> 3. [OAuth & Permissions] を選択
+> 4. [User Token Scopes] を選択 [channels:read, chat:write] を追加
+> 5. [Install to Workspace] を選択
+> 6. OAuth Access Token [Copy] を選択
+
+- Add App to Slack channel
+
+チャンネルにメッセージを投稿するためにはチャンネルにアプリを追加する必用があります.
+
+> 1. [(i) チャンネル詳細] を選択
+> 2. [... その他] を選択
+> 3. [アプリを追加する] を選択
+> 4. 作成したアプリを検索し、[追加]を選択. [表示する]となっている場合は追加は不要です.
 
 # How to use CLI
 
