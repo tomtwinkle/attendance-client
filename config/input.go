@@ -102,6 +102,9 @@ func (c *config) inputSlackToken() (string, error) {
 		Label:    "slack tokenを入力してください",
 		Validate: validate,
 	}
+	if err := browserOpen("https://api.slack.com/start/overview#creating"); err != nil {
+		return "", err
+	}
 	result, err := prompt.Run()
 	if err != nil {
 		fmt.Printf("%v\n", err.Error())
@@ -129,7 +132,6 @@ func (c *config) inputSlackChannel() (string, error) {
 	return result, nil
 }
 
-//nolint
 func browserOpen(url string) error {
 	switch runtime.GOOS {
 	case "windows":
