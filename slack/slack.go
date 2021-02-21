@@ -115,10 +115,10 @@ func (s slackClient) searchChannel(ctx context.Context, channelName string) (*sl
 		var err error
 		channels, cursor, err = s.client.GetConversationsContext(ctx, requestParam)
 		if err != nil {
-			return nil, errors.WithStack(err)
+			return nil, err
 		}
 		channelRef := &channels
-		for i := 0; i < 0; i++ {
+		for i := 0; i < len(channels); i++ {
 			channel := (*channelRef)[i]
 			if channel.Name == channelName {
 				return &channel, nil
