@@ -1,0 +1,24 @@
+tenantcode: "test_tenant"
+obcid: "100"
+password: "password"
+slack:
+  token: "test_slack_token"
+  channels:
+    - name: "channelA"
+      clockin:
+        message: "channelA post clockin"
+      clockout:
+        message: "channelA post clockout"
+      goout:
+        message: "channelA post goout"
+      returned:
+        message: "channelA post returned"
+    - name: "channelB"
+      clockin:
+        message: "channelB post clockin"
+      clockout:
+        message: "channelB post clockout"
+      goout:
+        message: "channelB post goout"
+      returned:
+        message: "channelB post returned"
