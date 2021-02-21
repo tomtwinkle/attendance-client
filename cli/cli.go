@@ -55,8 +55,11 @@ func (c cli) PunchMark(ctx context.Context, clockType bugyoclient.ClockType, sla
 		case bugyoclient.ClockTypeClockIn:
 			results, err = c.slackClient.Action(ctx, slack.ClockTypeClockIn)
 		case bugyoclient.ClockTypeClockOut:
+			results, err = c.slackClient.Action(ctx, slack.ClockTypeClockOut)
 		case bugyoclient.ClockTypeGoOut:
+			results, err = c.slackClient.Action(ctx, slack.ClockTypeGoOut)
 		case bugyoclient.ClockTypeReturned:
+			results, err = c.slackClient.Action(ctx, slack.ClockTypeReturned)
 		}
 		if err != nil {
 			return err
