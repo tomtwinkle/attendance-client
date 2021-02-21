@@ -92,7 +92,6 @@ func (c *config) inputUseSlack() (bool, error) {
 }
 
 func (c *config) inputSlackToken() (string, error) {
-	const slackAppsUrl = "https://api.slack.com/apps"
 	validate := func(input string) error {
 		if strings.HasPrefix(input, "xoxp-") {
 			return nil
