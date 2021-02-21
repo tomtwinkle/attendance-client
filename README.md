@@ -7,7 +7,7 @@ Attendance Bugyo Cloud Punchmark & post Slack message CLI
 - Install with PowerShell
 
 ```poweshell
-iwr https://github.com/tomtwinkle/attendance-client/releases/download/v0.0.4/attendance_windows_amd64.zip -OutFile attendance.zip && Expand-Archive -Path attendance.zip && rm attendance.zip
+iwr https://github.com/tomtwinkle/attendance-client/releases/download/v0.0.5/attendance_windows_amd64.zip -OutFile attendance.zip && Expand-Archive -Path attendance.zip && rm attendance.zip
 cd attendance
 .\attendance.exe help
 ```
