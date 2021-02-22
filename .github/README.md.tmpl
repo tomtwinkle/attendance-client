@@ -60,10 +60,14 @@ slack: *2
             message: "<再入時に投稿するコメント*4>"
 ```
 
-*1 : URLのこの部分 https://id.obc.jp/<テナントコード>
-*2 slack 要素の削除でslackへの投稿は行われなくなります。
-*3 : yaml Sequence記法で複数チャンネルへ投稿することも可能です. [Sequence of Mappingsを参照](https://yaml.org/spec/1.2/spec.html#id2759963)
-*4 : コメントをbankにする or clockin,clockout等の要素削除でslackへの投稿は行われなくなります
+*1 : URLを参照. `https://id.obc.jp/<テナントコード>`
+
+*2 : slack 要素の削除でslackへの投稿は行われなくなります.
+
+*3 : yaml Sequence記法で複数チャンネルへ投稿することも可能です.
+[Sequence of Mappingsを参照](https://yaml.org/spec/1.2/spec.html#id2759963)
+
+*4 : コメントをbankにする or clockin,clockout等の要素削除でslackへの投稿は行われなくなります.
 
 ## 出勤
 
