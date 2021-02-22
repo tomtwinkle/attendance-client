@@ -32,7 +32,40 @@ cd attendance
 
 # How to use CLI
 
-- 出勤
+## 設定ファイル作成
+
+- 初期設定
+
+```shell
+.\attendance init
+```
+
+- 作成された `attendance.yaml` を任意で編集
+
+```
+tenantcode: <テナントコード*1>
+obcid: <OBC ID>
+password: <OBC Password>
+slack: *2
+    token: <slack token>
+    channels:
+      - name: <slackチャンネル名*3>
+        clockin:
+            message: "<出勤時に投稿するコメント*4>"
+        clockout:
+            message: "<退勤時に投稿するコメント*4>"
+        goout:
+            message: "<外出時に投稿するコメント*4>"
+        returned:
+            message: "<再入時に投稿するコメント*4>"
+```
+
+*1 : URLのこの部分 https://id.obc.jp/<テナントコード>
+*2 slack 要素の削除でslackへの投稿は行われなくなります。
+*3 : yaml Sequence記法で複数チャンネルへ投稿することも可能です. [Sequence of Mappingsを参照](https://yaml.org/spec/1.2/spec.html#id2759963)
+*4 : コメントをbankにする or clockin,clockout等の要素削除でslackへの投稿は行われなくなります
+
+## 出勤
 
 ```shell
 .\attendance punchmark --type in
@@ -40,7 +73,7 @@ or
 .\attendance pm -t in
 ```
 
-- 退出
+## 退出
 
 ```shell
 .\attendance punchmark --type out
@@ -48,7 +81,7 @@ or
 .\attendance pm -t out
 ```
 
-- 外出
+## 外出
 
 ```shell
 .\attendance punchmark --type go
@@ -56,10 +89,24 @@ or
 .\attendance pm -t go
 ```
 
-- 再入
+## 再入
 
 ```shell
 .\attendance punchmark --type return
 or 
 .\attendance pm -t return
+```
+
+## その他オプション
+
+- slackにのみ投稿する
+
+```shell
+.\attendance punchmark --type in --slackonly
+```
+
+- 打刻のみ行う
+
+```shell
+.\attendance punchmark --type in --slackonly
 ```

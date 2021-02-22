@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	attendanceclient "github.com/tomtwinkle/attendance-client/cli"
+	"github.com/tomtwinkle/attendance-client/config"
 	bugyoclient "github.com/tomtwinkle/bugyo-client-go"
 	"github.com/urfave/cli"
 	"log"
@@ -20,6 +21,17 @@ func main() {
 	app.Author = "tomtwinkle"
 	app.Version = fmt.Sprintf("attendance-client cli version %s.rev-%s", version, revision)
 	app.Commands = []cli.Command{
+		{
+			Name:  "init",
+			Usage: "設定ファイルの作成",
+			Action: func(c *cli.Context) error {
+				cfg := config.NewConfig()
+				if _, err := cfg.Init(); err != nil {
+					return err
+				}
+				return nil
+			},
+		},
 		{
 			Name:      "punchmark",
 			ShortName: "pm",
@@ -39,20 +51,26 @@ func main() {
 					Usage:    "打刻は行わずslackにのみ通知する --slackonly or -so",
 					Required: false,
 				},
+				cli.BoolFlag{
+					Name:     "slackskip, ss",
+					Usage:    "slackに通知をせず打刻のみ行う --slackskip or -ss",
+					Required: false,
+				},
 			},
 			Action: func(c *cli.Context) error {
 				ctx := context.Background()
 				acli := attendanceclient.NewCLI()
-				slaclOnly := c.Bool("slackonly")
+				slackonly := c.Bool("slackonly")
+				slackskip := c.Bool("slackskip")
 				switch c.String("type") {
 				case "in":
-					return acli.PunchMark(ctx, bugyoclient.ClockTypeClockIn, slaclOnly)
+					return acli.PunchMark(ctx, bugyoclient.ClockTypeClockIn, slackonly, slackskip)
 				case "out":
-					return acli.PunchMark(ctx, bugyoclient.ClockTypeClockOut, slaclOnly)
+					return acli.PunchMark(ctx, bugyoclient.ClockTypeClockOut, slackonly, slackskip)
 				case "go":
-					return acli.PunchMark(ctx, bugyoclient.ClockTypeGoOut, slaclOnly)
+					return acli.PunchMark(ctx, bugyoclient.ClockTypeGoOut, slackonly, slackskip)
 				case "return":
-					return acli.PunchMark(ctx, bugyoclient.ClockTypeReturned, slaclOnly)
+					return acli.PunchMark(ctx, bugyoclient.ClockTypeReturned, slackonly, slackskip)
 				default:
 					return cli.ShowSubcommandHelp(c)
 				}
