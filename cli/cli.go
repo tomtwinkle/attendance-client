@@ -14,7 +14,7 @@ type cli struct {
 }
 
 type CLI interface {
-	PunchMark(ctx context.Context, clockType bugyoclient.ClockType, slackOnly bool) error
+	PunchMark(ctx context.Context, clockType bugyoclient.ClockType, slackOnly, slackSkip bool) error
 }
 
 func NewCLI() CLI {
@@ -37,7 +37,7 @@ func NewCLI() CLI {
 	return &cli{c, slack.NewSlackClient(bCfg.Slack)}
 }
 
-func (c cli) PunchMark(ctx context.Context, clockType bugyoclient.ClockType, slackOnly bool) error {
+func (c cli) PunchMark(ctx context.Context, clockType bugyoclient.ClockType, slackOnly, slackSkip bool) error {
 	if !slackOnly {
 		if err := c.bugyoClient.Login(); err != nil {
 			return err
@@ -48,7 +48,7 @@ func (c cli) PunchMark(ctx context.Context, clockType bugyoclient.ClockType, sla
 		log.Printf("success Punchmark [%s]", clockType)
 	}
 
-	if c.slackClient != nil {
+	if c.slackClient != nil && !slackSkip {
 		var results []*slack.SlackResult
 		var err error
 		switch clockType {

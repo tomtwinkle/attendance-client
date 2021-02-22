@@ -70,7 +70,7 @@ func (c *config) Init() (*ConfigYaml, error) {
 func (c *config) Read() (*ConfigYaml, error) {
 	if _, err := os.Stat(c.ConfigPath); err != nil {
 		if os.IsNotExist(err) {
-			return nil, errors.New("config not found. please execute attendance --init")
+			return nil, errors.New("config not found. please execute init command\n$ attendance init")
 		} else {
 			return nil, err
 		}
