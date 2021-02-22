@@ -112,5 +112,5 @@ or
 - 打刻のみ行う
 
 ```shell
-.\attendance punchmark --type in --slackonly
+.\attendance punchmark --type in --slackskip
 ```
