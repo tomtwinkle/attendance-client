@@ -19,7 +19,7 @@ type CLI interface {
 
 func NewCLI() CLI {
 	cfg := config.NewConfig()
-	bCfg, err := cfg.Init()
+	bCfg, err := cfg.Read()
 	if err != nil {
 		log.Fatal(err)
 	}

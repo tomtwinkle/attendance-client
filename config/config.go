@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 	"log"
 	"os"
@@ -40,6 +41,7 @@ type config struct {
 
 type Config interface {
 	Init() (*ConfigYaml, error)
+	Read() (*ConfigYaml, error)
 }
 
 func NewConfig() Config {
@@ -61,6 +63,17 @@ func (c *config) Init() (*ConfigYaml, error) {
 			return nil, err
 		}
 		return c.writeConfig()
+	}
+	return c.readConfig()
+}
+
+func (c *config) Read() (*ConfigYaml, error) {
+	if _, err := os.Stat(c.ConfigPath); err != nil {
+		if os.IsNotExist(err) {
+			return nil, errors.New("config not found. please execute attendance --init")
+		} else {
+			return nil, err
+		}
 	}
 	return c.readConfig()
 }

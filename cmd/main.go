@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	attendanceclient "github.com/tomtwinkle/attendance-client/cli"
+	"github.com/tomtwinkle/attendance-client/config"
 	bugyoclient "github.com/tomtwinkle/bugyo-client-go"
 	"github.com/urfave/cli"
 	"log"
@@ -20,6 +21,17 @@ func main() {
 	app.Author = "tomtwinkle"
 	app.Version = fmt.Sprintf("attendance-client cli version %s.rev-%s", version, revision)
 	app.Commands = []cli.Command{
+		{
+			Name:  "init",
+			Usage: "設定ファイルの作成",
+			Action: func(c *cli.Context) error {
+				cfg := config.NewConfig()
+				if _, err := cfg.Init(); err != nil {
+					return err
+				}
+				return nil
+			},
+		},
 		{
 			Name:      "punchmark",
 			ShortName: "pm",
