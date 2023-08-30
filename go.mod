@@ -10,5 +10,5 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/tomtwinkle/bugyo-client-go v0.10.6
 	github.com/urfave/cli v1.22.5
-	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+	gopkg.in/yaml.v3 v3.0.0
 )
